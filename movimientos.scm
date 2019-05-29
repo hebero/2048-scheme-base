@@ -5,7 +5,7 @@
 (vector-set! (vector-ref matriz 0) 3 0)
 
 (vector-set! (vector-ref matriz 1) 0 0)
-(vector-set! (vector-ref matriz 1) 1 2)
+(vector-set! (vector-ref matriz 1) 1 8)
 (vector-set! (vector-ref matriz 1) 2 2)
 (vector-set! (vector-ref matriz 1) 3 0)
 
@@ -18,6 +18,18 @@
 (vector-set! (vector-ref matriz 3) 1 4)
 (vector-set! (vector-ref matriz 3) 2 4)
 (vector-set! (vector-ref matriz 3) 3 0)
+(define (getRandomPos)
+    (values (random 4) (random 4))
+)
+(define (setNewNumber)
+    (define-values (x y) (values 0 0))
+    (set!-values (x y) (getRandomPos))
+    (cond
+        [()]
+    )
+)
+
+
 
 ;matriz
 (define (opera-pares n n2)
@@ -201,7 +213,6 @@
     )
     (ciclo2)
 )
-
 
 (movimientoArriba)
 matriz
