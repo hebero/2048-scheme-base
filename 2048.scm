@@ -7,6 +7,7 @@
     (display "Conectando...")
     (define-values (in out) (tcp-connect ip 5001))
     (write "P1" out)
+    (read )
     (define serverMatriz (read in))
 )
 
