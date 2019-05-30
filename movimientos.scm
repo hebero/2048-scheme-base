@@ -225,7 +225,44 @@
                 ]
                 [(and (= n1 val1) (= n2 val2))
                     (cond 
-                    
+                    [(and (= n2 val2) (= n1 val1)(= row_cont 3))
+                        (cond 
+                        [(= row_cont 3) 
+                                (set! val1 (vector-ref (vector-ref matriz (- row_cont 1)) col_cont))
+                                (set! val2 (vector-ref (vector-ref matriz (- row_cont 2)) col_cont))
+                                (set!-values (n1 n2) (opera-pares val1 val2))
+                                (cond 
+                                    [(and (> n1 val1) (= n2 0) (= (vector-ref (vector-ref matriz row_cont) col_cont) 0) )
+                                        (vector-set! (vector-ref matriz row_cont) col_cont n1)
+                                        (vector-set! (vector-ref matriz (- row_cont 1)) col_cont 0)
+                                        (vector-set! (vector-ref matriz (- row_cont 2)) col_cont 0)
+                                    ]
+                                    [(and (> n1 val1) (= n2 0))
+                                        (vector-set! (vector-ref matriz (- row_cont 1)) col_cont n1)
+                                        (vector-set! (vector-ref matriz (- row_cont 2)) col_cont 0)
+                                    ]
+                                )   
+                                (set! row_cont (- row_cont 2))                             
+                                (ciclo1)
+                            ]
+                            [(and (= row_cont 1) (= (vector-ref (vector-ref matriz (+ row_cont 1)) col_cont) 0))
+                                (vector-set! (vector-ref matriz (+ row_cont 1) ) col_cont n1)
+                                (vector-set! (vector-ref matriz row_cont ) col_cont n2)
+                                (vector-set! (vector-ref matriz (- row_cont 1) ) col_cont 0)
+                                (cond
+                                    [(= (vector-ref (vector-ref matriz (+ row_cont 2)) col_cont) 0)
+                                        (vector-set! (vector-ref matriz (+ row_cont 2)) col_cont n1)
+                                        (vector-set! (vector-ref matriz (+ row_cont 1) ) col_cont n2)
+                                        (vector-set! (vector-ref matriz (- row_cont 1)) col_cont 0)
+                                        (vector-set! (vector-ref matriz (+ row_cont 1)) col_cont 0)
+                                    ]
+                                )
+                            ]
+                            
+                        )
+                        (set! row_cont (- row_cont 2))
+                        (ciclo1)
+                    ]
                     [(and (= n1 0) (> n2 0))
                         (vector-set! (vector-ref matriz row_cont) col_cont n2)
                         (vector-set! (vector-ref matriz (- row_cont 1)) col_cont 0)
@@ -269,41 +306,7 @@
                         (set! row_cont (- row_cont 2))
                         (ciclo1)
                     ]
-                    [(and (= n2 val2) (= n1 val1))
-                        (cond 
-                            [(and (= row_cont 1) (= (vector-ref (vector-ref matriz (+ row_cont 1)) col_cont) 0))
-                                (vector-set! (vector-ref matriz (+ row_cont 1) ) col_cont n1)
-                                (vector-set! (vector-ref matriz row_cont ) col_cont n2)
-                                (vector-set! (vector-ref matriz (- row_cont 1) ) col_cont 0)
-                                (cond
-                                    [(= (vector-ref (vector-ref matriz (+ row_cont 2)) col_cont) 0)
-                                        (vector-set! (vector-ref matriz (+ row_cont 2)) col_cont n1)
-                                        (vector-set! (vector-ref matriz (+ row_cont 1) ) col_cont n2)
-                                        (vector-set! (vector-ref matriz (- row_cont 1)) col_cont 0)
-                                        (vector-set! (vector-ref matriz (+ row_cont 1)) col_cont 0)
-                                    ]
-                                )
-                            ]
-                            [(= row_cont 0) 
-                                (set! val1 (vector-ref (vector-ref matriz (- row_cont 1)) col_cont))
-                                (set! val2 (vector-ref (vector-ref matriz (- row_cont 2)) col_cont))
-                                (set!-values (n1 n2) (oepra-pares val1 val2))
-                                (cond 
-                                    [(and (> n1 val1) (= n2 0) (= (vector-ref (vector-ref matriz row_cont) col_cont) 0) )
-                                        (vector-set! (vector-ref matriz row_cont) col_cont n1)
-                                        (vector-set! (vector-ref matriz (- row_cont 1)) col_cont 0)
-                                        (vector-set! (vector-ref matriz (- row_cont 2)) col_cont 0)
-                                    ]
-                                    [(and (> n1 val1) (= n2 0))
-                                        (vector-set! (vector-ref matriz (- row_cont 1)) col_cont n1)
-                                        (vector-set! (vector-ref matriz (- row_cont 2)) col_cont 0)
-                                    ]
-                                )                                
-                            ]
-                        )
-                        (set! row_cont (- row_cont 2))
-                        (ciclo1)
-                    ]
+                    
                         
                     )
                 ]
@@ -329,7 +332,9 @@
 ;-----------------------------------------
 ;estos son pruebas
 matriz
-(movimientoarriba)
+(movimientoabajo)
+matriz
+(movimientoabajo)
 matriz
 (movimientoarriba)
 matriz
