@@ -1,11 +1,11 @@
 (define matriz (vector (make-vector 4) (make-vector 4) (make-vector 4) (make-vector 4)))
 (vector-set! (vector-ref matriz 0) 0 0)
-(vector-set! (vector-ref matriz 0) 1 2)
-(vector-set! (vector-ref matriz 0) 2 2)
+(vector-set! (vector-ref matriz 0) 1 0)
+(vector-set! (vector-ref matriz 0) 2 0)
 (vector-set! (vector-ref matriz 0) 3 0)
 
 (vector-set! (vector-ref matriz 1) 0 0)
-(vector-set! (vector-ref matriz 1) 1 8)
+(vector-set! (vector-ref matriz 1) 1 2)
 (vector-set! (vector-ref matriz 1) 2 2)
 (vector-set! (vector-ref matriz 1) 3 0)
 
@@ -25,14 +25,14 @@
     (define-values (x y) (values 0 0))
     (set!-values (x y) (getRandomPos))
 
-    (define (ciclo)
+    ; (define (ciclo)
         
-    )
+    ; )
 
 
-    (cond
-        [()]
-    )
+    ; (cond
+    ;     [()]
+    ; )
 )
 
 
@@ -85,7 +85,48 @@
                 ]
                 [(and (= n1 val1) (= n2 val2))
                     (cond 
-                    
+                        [(and (= n2 val2) (= n1 val1) (= row_cont 0))
+                        (cond 
+                            [(= row_cont 0)
+                                (set! val1 (vector-ref (vector-ref matriz (+ row_cont 1)) col_cont))
+                                (set! val2 (vector-ref (vector-ref matriz (+ row_cont 2)) col_cont))
+                                (display val1)
+                                (newline)
+                                (display val2)
+                                (set!-values (n1 n2) (opera-pares val1 val2))
+                                (cond 
+                                    [(and (> n1 val1) (= n2 0) (= (vector-ref (vector-ref matriz row_cont) col_cont) 0) )
+                                        (vector-set! (vector-ref matriz row_cont) col_cont n1)
+                                        (vector-set! (vector-ref matriz (+ row_cont 1)) col_cont 0)
+                                        (vector-set! (vector-ref matriz (+ row_cont 2)) col_cont 0)
+                                    ]
+                                    [(and (> n1 val1) (= n2 0))
+                                        (vector-set! (vector-ref matriz (+ row_cont 1)) col_cont n1)
+                                        (vector-set! (vector-ref matriz (+ row_cont 2)) col_cont 0)
+                                    ]
+                                ) 
+                                (set! row_cont (+ row_cont 2))
+                                (ciclo1)
+                            ]
+
+                            [(and (= row_cont 2) (= (vector-ref (vector-ref matriz (- row_cont 1)) col_cont) 0))
+                                (vector-set! (vector-ref matriz (- row_cont 1) ) col_cont n1)
+                                (vector-set! (vector-ref matriz row_cont ) col_cont n2)
+                                (vector-set! (vector-ref matriz (+ row_cont 1) ) col_cont 0)
+                                (cond
+                                    [(= (vector-ref (vector-ref matriz (- row_cont 2)) col_cont) 0)
+                                        (vector-set! (vector-ref matriz (- row_cont 2) ) col_cont n1)
+                                        (vector-set! (vector-ref matriz (- row_cont 1) ) col_cont n2)
+                                        (vector-set! (vector-ref matriz row_cont ) col_cont 0)
+                                        (vector-set! (vector-ref matriz (+ row_cont 1) ) col_cont 0)
+                                    ]
+                                )
+                            ]
+                            
+                        )
+                        (set! row_cont (+ row_cont 2))
+                        (ciclo1)
+                    ]
                     [(and (= n1 0) (> n2 0))
                         (vector-set! (vector-ref matriz row_cont) col_cont n2)
                         (vector-set! (vector-ref matriz (+ row_cont 1)) col_cont 0)
@@ -127,41 +168,7 @@
                         (set! row_cont (+ row_cont 2))
                         (ciclo1)
                     ]
-                    [(and (= n2 val2) (= n1 val1))
-                        (cond 
-                            [(and (= row_cont 2) (= (vector-ref (vector-ref matriz (- row_cont 1)) col_cont) 0))
-                                (vector-set! (vector-ref matriz (- row_cont 1) ) col_cont n1)
-                                (vector-set! (vector-ref matriz row_cont ) col_cont n2)
-                                (vector-set! (vector-ref matriz (+ row_cont 1) ) col_cont 0)
-                                (cond
-                                    [(= (vector-ref (vector-ref matriz (- row_cont 2)) col_cont) 0)
-                                        (vector-set! (vector-ref matriz (- row_cont 2) ) col_cont n1)
-                                        (vector-set! (vector-ref matriz (- row_cont 1) ) col_cont n2)
-                                        (vector-set! (vector-ref matriz row_cont ) col_cont 0)
-                                        (vector-set! (vector-ref matriz (+ row_cont 1) ) col_cont 0)
-                                    ]
-                                )
-                            ]
-                            [else 
-                                (set! val1 (vector-ref (vector-ref matriz (+ row_cont 1)) col_cont))
-                                (set! val2 (vector-ref (vector-ref matriz (+ row_cont 2)) col_cont))
-                                (set!-values (n1 n2) (oepra-pares val1 val2))
-                                (cond 
-                                    [(and (> n1 val1) (= n2 0) (= (vector-ref (vector-ref matriz row_cont) col_cont) 0) )
-                                        (vector-set! (vector-ref matriz row_cont) col_cont n1)
-                                        (vector-set! (vector-ref matriz (+ row_cont 1)) col_cont 0)
-                                        (vector-set! (vector-ref matriz (+ row_cont 2)) col_cont 0)
-                                    ]
-                                    [(and (> n1 val1) (= n2 0))
-                                        (vector-set! (vector-ref matriz (+ row_cont 1)) col_cont n1)
-                                        (vector-set! (vector-ref matriz (+ row_cont 2)) col_cont 0)
-                                    ]
-                                )                                
-                            ]
-                        )
-                        (set! row_cont (+ row_cont 2))
-                        (ciclo1)
-                    ]
+                    
                         
                     )
                 ]
@@ -280,7 +287,7 @@
                                     ]
                                 )
                             ]
-                            [else 
+                            [(= row_cont 0) 
                                 (set! val1 (vector-ref (vector-ref matriz (- row_cont 1)) col_cont))
                                 (set! val2 (vector-ref (vector-ref matriz (- row_cont 2)) col_cont))
                                 (set!-values (n1 n2) (oepra-pares val1 val2))
@@ -321,14 +328,6 @@
     )
     (ciclo2)
 )
-
-(movimientoarriba)
-matriz
-(movimientoabajo)
-matriz
-(movimientoabajo)
-matriz
-(movimientoabajo)
 matriz
 (movimientoarriba)
 matriz
