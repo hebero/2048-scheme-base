@@ -24,6 +24,12 @@
 (define (setNewNumber)
     (define-values (x y) (values 0 0))
     (set!-values (x y) (getRandomPos))
+
+    (define (ciclo)
+        
+    )
+
+
     (cond
         [()]
     )
@@ -42,7 +48,7 @@
     )
 )
 (define base 2)
-(define (movimientoArriba)
+(define (movimientoarriba)
     (define col_cont 0)
     (define row_cont 0)
     (define val1 0)
@@ -136,6 +142,22 @@
                                     ]
                                 )
                             ]
+                            [else 
+                                (set! val1 (vector-ref (vector-ref matriz (+ row_cont 1)) col_cont))
+                                (set! val2 (vector-ref (vector-ref matriz (+ row_cont 2)) col_cont))
+                                (set!-values (n1 n2) (oepra-pares val1 val2))
+                                (cond 
+                                    [(and (> n1 val1) (= n2 0) (= (vector-ref (vector-ref matriz row_cont) col_cont) 0) )
+                                        (vector-set! (vector-ref matriz row_cont) col_cont n1)
+                                        (vector-set! (vector-ref matriz (+ row_cont 1)) col_cont 0)
+                                        (vector-set! (vector-ref matriz (+ row_cont 2)) col_cont 0)
+                                    ]
+                                    [(and (> n1 val1) (= n2 0))
+                                        (vector-set! (vector-ref matriz (+ row_cont 1)) col_cont n1)
+                                        (vector-set! (vector-ref matriz (+ row_cont 2)) col_cont 0)
+                                    ]
+                                )                                
+                            ]
                         )
                         (set! row_cont (+ row_cont 2))
                         (ciclo1)
@@ -162,7 +184,7 @@
     (ciclo2)
 )
 
-(define (movimientoAbajo)
+(define (movimientoabajo)
     (define col_cont 0)
     (define row_cont 3)
     (define val1 0)
@@ -258,6 +280,22 @@
                                     ]
                                 )
                             ]
+                            [else 
+                                (set! val1 (vector-ref (vector-ref matriz (- row_cont 1)) col_cont))
+                                (set! val2 (vector-ref (vector-ref matriz (- row_cont 2)) col_cont))
+                                (set!-values (n1 n2) (oepra-pares val1 val2))
+                                (cond 
+                                    [(and (> n1 val1) (= n2 0) (= (vector-ref (vector-ref matriz row_cont) col_cont) 0) )
+                                        (vector-set! (vector-ref matriz row_cont) col_cont n1)
+                                        (vector-set! (vector-ref matriz (- row_cont 1)) col_cont 0)
+                                        (vector-set! (vector-ref matriz (- row_cont 2)) col_cont 0)
+                                    ]
+                                    [(and (> n1 val1) (= n2 0))
+                                        (vector-set! (vector-ref matriz (- row_cont 1)) col_cont n1)
+                                        (vector-set! (vector-ref matriz (- row_cont 2)) col_cont 0)
+                                    ]
+                                )                                
+                            ]
                         )
                         (set! row_cont (- row_cont 2))
                         (ciclo1)
@@ -284,13 +322,13 @@
     (ciclo2)
 )
 
-(movimientoArriba)
+(movimientoarriba)
 matriz
-(movimientoAbajo)
+(movimientoabajo)
 matriz
-(movimientoAbajo)
+(movimientoabajo)
 matriz
-(movimientoAbajo)
+(movimientoabajo)
 matriz
-(movimientoArriba)
+(movimientoarriba)
 matriz
