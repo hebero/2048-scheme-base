@@ -186,7 +186,8 @@
 
                             (cond
                                 [(= (vector-ref (vector-ref matriz (+ row_cont 2)) col_cont) 0)
-                                    (vector-set! (vector-ref matriz (+ row_cont 1)) col_cont n1)
+
+                                    (vector-set! (vector-ref matriz (+ row_cont 2)) col_cont n1)
                                     (vector-set! (vector-ref matriz row_cont ) col_cont 0)
                                     (vector-set! (vector-ref matriz (- row_cont 1)) col_cont 0)
                                 ]
@@ -206,7 +207,16 @@
                             [(and (= row_cont 1) (= (vector-ref (vector-ref matriz (+ row_cont 1)) col_cont) 0))
                                 (vector-set! (vector-ref matriz (+ row_cont 1) ) col_cont n2)
                                 (vector-set! (vector-ref matriz row_cont ) col_cont 0)
-                                (vector-set! (vector-ref matriz (- row_cont 1) ) col_cont 0)                                
+                                (vector-set! (vector-ref matriz (- row_cont 1) ) col_cont 0)     
+                                (cond
+                                    [(= (vector-ref (vector-ref matriz (+ row_cont 2)) col_cont) 0)
+
+                                        (vector-set! (vector-ref matriz (+ row_cont 2)) col_cont n2)
+                                        (vector-set! (vector-ref matriz row_cont ) col_cont 0)
+                                        (vector-set! (vector-ref matriz (- row_cont 1)) col_cont 0)
+                                        (vector-set! (vector-ref matriz (+ row_cont 1)) col_cont 0)
+                                    ]
+                                )
                             ]
                             
                         )
@@ -219,6 +229,15 @@
                                 (vector-set! (vector-ref matriz (+ row_cont 1) ) col_cont n1)
                                 (vector-set! (vector-ref matriz row_cont ) col_cont 0)
                                 (vector-set! (vector-ref matriz (- row_cont 1) ) col_cont 0)
+                                (cond
+                                    [(= (vector-ref (vector-ref matriz (+ row_cont 2)) col_cont) 0)
+
+                                        (vector-set! (vector-ref matriz (+ row_cont 2)) col_cont n1)
+                                        (vector-set! (vector-ref matriz row_cont ) col_cont 0)
+                                        (vector-set! (vector-ref matriz (- row_cont 1)) col_cont 0)
+                                        (vector-set! (vector-ref matriz (+ row_cont 1)) col_cont 0)
+                                    ]
+                                )
                             ]
                         )
                         (set! row_cont (- row_cont 2))
@@ -230,6 +249,14 @@
                                 (vector-set! (vector-ref matriz (+ row_cont 1) ) col_cont n1)
                                 (vector-set! (vector-ref matriz row_cont ) col_cont n2)
                                 (vector-set! (vector-ref matriz (- row_cont 1) ) col_cont 0)
+                                (cond
+                                    [(= (vector-ref (vector-ref matriz (+ row_cont 2)) col_cont) 0)
+                                        (vector-set! (vector-ref matriz (+ row_cont 2)) col_cont n1)
+                                        (vector-set! (vector-ref matriz (+ row_cont 1) ) col_cont n2)
+                                        (vector-set! (vector-ref matriz (- row_cont 1)) col_cont 0)
+                                        (vector-set! (vector-ref matriz (+ row_cont 1)) col_cont 0)
+                                    ]
+                                )
                             ]
                         )
                         (set! row_cont (- row_cont 2))
