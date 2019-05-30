@@ -90,9 +90,6 @@
                             [(= row_cont 0)
                                 (set! val1 (vector-ref (vector-ref matriz (+ row_cont 1)) col_cont))
                                 (set! val2 (vector-ref (vector-ref matriz (+ row_cont 2)) col_cont))
-                                (display val1)
-                                (newline)
-                                (display val2)
                                 (set!-values (n1 n2) (opera-pares val1 val2))
                                 (cond 
                                     [(and (> n1 val1) (= n2 0) (= (vector-ref (vector-ref matriz row_cont) col_cont) 0) )
@@ -328,6 +325,11 @@
     )
     (ciclo2)
 )
+
+;-----------------------------------------
+;estos son pruebas
+matriz
+(movimientoarriba)
 matriz
 (movimientoarriba)
 matriz
